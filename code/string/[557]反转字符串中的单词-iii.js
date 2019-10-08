@@ -11,7 +11,7 @@
  */
 var reverseWords = s =>
   s
-    .split(' ')
+    .match(/[\w']+/g)
     .map(item =>
       item
         .split('')
