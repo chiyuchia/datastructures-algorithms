@@ -7,7 +7,6 @@ export interface List<T> {
   findByIndex(index: number): INode<T> | undefined;
   push(value: T): void;
   insert(value: T, index?: any): void;
-  unshift(value: T): void;
 }
 
 export class Node<T> implements INode<T> {
