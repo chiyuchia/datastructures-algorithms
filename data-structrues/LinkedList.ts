@@ -4,9 +4,15 @@ export interface INode<T> {
 }
 
 export interface List<T> {
-  findByIndex(index: number): INode<T> | undefined;
-  push(value: T): void;
-  insert(value: T, index?: any): void;
+  getHead(): INode<T>;
+  find(value: T): INode<T> | undefined;
+  findLast(): INode<T> | undefined;
+  insert(newValue: T, value: T): boolean;
+  append(value: T): void;
+  remove(value: T): boolean;
+  size(): number;
+  isEmpty(): boolean;
+  clear(): void;
 }
 
 export class Node<T> implements INode<T> {
@@ -25,14 +31,45 @@ export class LinkedList<T> implements List<T> {
     this.head = head ?? new Node<T>(undefined);
   }
 
-  public findByIndex(index: number) {
-    if (index < 0 || index > this.count) return undefined;
+  public getHead() {
+    return this.head;
+  }
+
+  public find(value: T) {
     let currentNode = this.head;
-    for (let i = 0; i < index; i++) currentNode = currentNode.next;
+    while (currentNode !== null) {
+      if (currentNode.value === value) return currentNode;
+      currentNode = currentNode.next;
+    }
+    return undefined;
+  }
+
+  private findPreNode(value: T) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.next.value === value) return currentNode;
+      currentNode = currentNode.next;
+    }
+    return undefined;
+  }
+
+  public findLast() {
+    let currentNode = this.head;
+    while (currentNode.next !== null) currentNode = currentNode.next;
     return currentNode;
   }
 
-  public push(value: T) {
+  public insert(newValue: T, value: T) {
+    const targetNode = this.find(value);
+    if (targetNode === undefined) return false;
+    const node = new Node<T>(newValue);
+    node.next = targetNode.next;
+    targetNode.next = node;
+    this.count += 1;
+    return true;
+  }
+
+  public append(value: T) {
     const node = new Node<T>(value);
     if (this.head === null) this.head = node;
     else {
@@ -43,32 +80,25 @@ export class LinkedList<T> implements List<T> {
     this.count += 1;
   }
 
-  public insert(value: T, index: number) {
-    if (index < 0 || index > this.count) return false;
-    const node = new Node<T>(value);
-    const targetNode = this.findByIndex(index);
-    node.next = targetNode.next;
-    targetNode.next = node;
-    this.count += 1;
+  public remove(value: T) {
+    const preNode = this.findPreNode(value);
+    if (preNode === undefined) return false;
+    const targetNode = preNode.next;
+    preNode.next = targetNode.next;
+    this.count -= 1;
     return true;
   }
+
+  public size() {
+    return this.count;
+  }
+
+  public isEmpty() {
+    return this.count === 0;
+  }
+
+  public clear() {
+    this.head.next = null;
+    this.count = 0;
+  }
 }
-
-const list = new LinkedList<number>();
-list.push(1);
-console.log("🚀 ~ file: LinkedList.ts ~ line 39 ~ list", list);
-list.push(2);
-console.log("🚀 ~ file: LinkedList.ts ~ line 39 ~ list", list);
-console.log(
-  "🚀 ~ file: LinkedList.ts ~ line 45 ~ list.findByIndex(0)",
-  list.findByIndex(0)
-);
-console.log(
-  "🚀 ~ file: LinkedList.ts ~ line 45 ~ list.findByIndex(1)",
-  list.findByIndex(1)
-);
-
-console.log(
-  "🚀 ~ file: LinkedList.ts ~ line 45 ~ list.findByIndex(2)",
-  list.findByIndex(2)
-);
