@@ -27,15 +27,15 @@ export class LinkedList<T> implements List<T> {
   private count: number = 0;
   private head: Node<T> = null;
 
-  constructor(head?: Node<T>) {
-    this.head = head ?? new Node<T>(undefined);
+  constructor() {
+    this.head = new Node<T>(undefined);
   }
 
-  public getHead() {
+  getHead() {
     return this.head;
   }
 
-  public find(value: T) {
+  find(value: T) {
     let currentNode = this.head;
     while (currentNode !== null) {
       if (currentNode.value === value) return currentNode;
@@ -53,13 +53,13 @@ export class LinkedList<T> implements List<T> {
     return undefined;
   }
 
-  public findLast() {
+  findLast() {
     let currentNode = this.head;
     while (currentNode.next !== null) currentNode = currentNode.next;
     return currentNode;
   }
 
-  public insert(newValue: T, value: T) {
+  insert(newValue: T, value: T) {
     const targetNode = this.find(value);
     if (targetNode === undefined) return false;
     const node = new Node<T>(newValue);
@@ -69,7 +69,7 @@ export class LinkedList<T> implements List<T> {
     return true;
   }
 
-  public append(value: T) {
+  append(value: T) {
     const node = new Node<T>(value);
     if (this.head === null) this.head = node;
     else {
@@ -80,7 +80,7 @@ export class LinkedList<T> implements List<T> {
     this.count += 1;
   }
 
-  public remove(value: T) {
+  remove(value: T) {
     const preNode = this.findPreNode(value);
     if (preNode === undefined) return false;
     const targetNode = preNode.next;
@@ -89,15 +89,15 @@ export class LinkedList<T> implements List<T> {
     return true;
   }
 
-  public size() {
+  size() {
     return this.count;
   }
 
-  public isEmpty() {
+  isEmpty() {
     return this.count === 0;
   }
 
-  public clear() {
+  clear() {
     this.head.next = null;
     this.count = 0;
   }
