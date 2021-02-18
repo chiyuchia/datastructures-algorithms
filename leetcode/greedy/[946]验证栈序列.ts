@@ -49,17 +49,14 @@
 // @lc code=start
 function validateStackSequences(pushed: number[], popped: number[]): boolean {
   const stack: number[] = [];
-  while (pushed.length || popped.length) {
-    if (pushed.length && stack.length === 0) {
-      stack.push(pushed.shift());
-    }
-    if (pushed.length && popped.length && stack.length && stack[stack.length - 1] !== popped[0]) {
-      stack.push(pushed.shift());
-    } else if (popped.length && stack.length && stack[stack.length - 1] === popped[0]) {
+  let j = 0;
+  for (let i = 0; i < pushed.length; i++) {
+    stack.push(pushed[i]);
+    while (stack.length && stack[stack.length - 1] === popped[j]) {
       stack.pop();
-      popped.shift();
-    } else return false;
+      j++;
+    }
   }
-  return true;
+  return j === popped.length;
 }
 // @lc code=end
