@@ -1,0 +1,6 @@
+{
+  /* 基本选项 */
+  "compilerOptions": {
+    "lib": ["esnext", "dom"] // 指定要包含在编译中的库文件
+  }
+}
