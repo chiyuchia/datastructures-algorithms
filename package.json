@@ -3,18 +3,15 @@
   "version": "1.0.0",
   "description": "leetcode",
   "main": "index.js",
-  "scripts": {
-    "test": "jest ./test"
-  },
   "repository": {
     "type": "git",
-    "url": "https://git.imooc.com/coding-315/leetcode.git"
+    "url": "https://github.com/chiyuchia/datastructures-algorithms.git"
   },
   "keywords": [
     "leetcode"
   ],
-  "author": "cuc_ygh@163.com",
-  "license": "Apache-2.0",
+  "author": "chiyuchiascau@gmail.com",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "7.1.2",
     "@babel/preset-env": "7.1.6",
@@ -36,8 +33,5 @@
     "eslint-plugin-standard": "4.0.0",
     "prettier": "^2.2.1",
     "typescript": "^4.2.2"
-  },
-  "directories": {
-    "test": "test"
   }
 }
