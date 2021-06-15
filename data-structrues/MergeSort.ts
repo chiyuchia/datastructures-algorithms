@@ -1,13 +1,13 @@
 /*
  * @Author: Yoga
  * @Date: 2021-02-23 23:40:35
- * @LastEditors: Yoga
- * @LastEditTime: 2021-02-23 23:46:11
+ * @LastEditors: 纪煜佳
+ * @LastEditTime: 2021-06-16 00:53:49
  * @Description: 归并排序
  */
 
 const merge = (left: number[], right: number[]) => {
-  let result = [];
+  const result = [];
   while (left.length && right.length) {
     if (left[0] <= right[0]) result.push(left.shift());
     else result.push(right.shift());
