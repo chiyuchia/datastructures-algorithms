@@ -40,11 +40,42 @@
  */
 
 // @lc code=start
+// function intersection(nums1: number[], nums2: number[]): number[] {
+//   const numsMap1: { [x: number]: number } = {};
+//   const resultMap = {};
+//   for (let i = 0; i < nums1.length; i++) numsMap1[nums1[i]] = nums1[i];
+//   for (let i = 0; i < nums2.length; i++) if (numsMap1[nums2[i]] !== undefined) resultMap[nums2[i]] = nums2[i];
+//   return Object.keys(resultMap).map((key) => resultMap[key]);
+// }
+
+// function intersection(nums1: number[], nums2: number[]): number[] {
+//   const set1 = new Set(nums1);
+//   const set2 = new Set(nums2);
+//   const result = [];
+//   for (const num of set1) {
+//     if (set2.has(num)) result.push(num);
+//   }
+//   return result;
+// }
+
 function intersection(nums1: number[], nums2: number[]): number[] {
-  const numsMap1: { [x: number]: number } = {};
-  const resultMap = {};
-  for (let i = 0; i < nums1.length; i++) numsMap1[nums1[i]] = nums1[i];
-  for (let i = 0; i < nums2.length; i++) if (numsMap1[nums2[i]] !== undefined) resultMap[nums2[i]] = nums2[i];
-  return Object.keys(resultMap).map((key) => resultMap[key]);
+  const result = [];
+  nums1 = nums1.sort((a, b) => a - b);
+  nums2 = nums2.sort((a, b) => a - b);
+  let i = 0;
+  let j = 0;
+  while (i < nums1.length && j < nums2.length) {
+    if (nums1[i] < nums2[j]) {
+      i++;
+    } else if (nums1[i] > nums2[j]) {
+      j++;
+    } else if (nums1[i] === nums2[j]) {
+      if (!result.length || nums1[i] !== result[result.length - 1]) result.push(nums1[i]);
+      i++;
+      j++;
+    }
+  }
+  return result;
 }
+
 // @lc code=end
