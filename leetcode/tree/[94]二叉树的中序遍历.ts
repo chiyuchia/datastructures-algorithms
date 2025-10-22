@@ -83,17 +83,18 @@
  */
 
 function inorderTraversal(root: TreeNode | null) {
-  if (!root) return [];
   const result: number[] = [];
-  const stack = [];
-  while (root || stack.length) {
-    while (root) {
-      stack.push(root);
-      root = root.left;
+  if (!root) return result;
+  const stack: TreeNode[] = [];
+  let curNode = root;
+  while (stack.length || curNode) {
+    while (curNode) {
+      stack.push(curNode);
+      curNode = curNode.left;
     }
-    root = stack.pop();
-    result.push(root.val);
-    root = root.right;
+    curNode = stack.pop();
+    result.push(curNode.val);
+    curNode = curNode.right;
   }
   return result;
 }
