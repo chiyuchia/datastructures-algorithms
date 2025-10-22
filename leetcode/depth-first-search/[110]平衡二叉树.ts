@@ -71,13 +71,22 @@
  */
 
 function isBalanced(root: TreeNode | null): boolean {
-  if (!root) return true;
-  const getDepth = (root: TreeNode) => {
-    if (root) return Math.max(getDepth(root.left), getDepth(root.right)) + 1;
-    return 0;
+  const getDepth = (root: TreeNode | null): number => {
+    const result = 0;
+    if (!root) return result;
+    const leftDepth = getDepth(root.left);
+    if (leftDepth === -1) {
+      return -1;
+    }
+    const rightDepth = getDepth(root.right);
+    if (rightDepth === -1) {
+      return -1;
+    }
+    if (Math.abs(leftDepth - rightDepth) > 1) {
+      return -1;
+    }
+    return Math.max(leftDepth, rightDepth) + 1;
   };
-  const leftDepth = getDepth(root.left);
-  const rightDepth = getDepth(root.right);
-  return Math.abs(leftDepth - rightDepth) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+  return getDepth(root) !== -1;
 }
 // @lc code=end
