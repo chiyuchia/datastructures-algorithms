@@ -88,28 +88,35 @@
 
 function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
   if (!headA || !headB) return null;
-  let lengthA = 0;
-  let lengthB = 0;
-  let currA = headA;
-  let currB = headB;
-  while (currA) {
-    lengthA += 1;
-    currA = currA.next;
+  let nodeA = headA;
+  let nodeB = headB;
+  while (nodeA !== nodeB) {
+    nodeA = nodeA === null ? headB : nodeA.next;
+    nodeB = nodeB === null ? headA : nodeB.next;
   }
-  currA = headA;
-  while (currB) {
-    lengthB += 1;
-    currB = currB.next;
-  }
-  currB = headB;
-  const gap = lengthA - lengthB;
-  if (gap > 0) for (let i = 0; i < gap; i++) currA = currA.next;
-  else for (let i = 0; i < -gap; i++) currB = currB.next;
-  while (currA) {
-    if (currA === currB) return currA;
-    currA = currA.next;
-    currB = currB.next;
-  }
-  return null;
+  return nodeA;
+  // let lengthA = 0;
+  // let lengthB = 0;
+  // let currA = headA;
+  // let currB = headB;
+  // while (currA) {
+  //   lengthA += 1;
+  //   currA = currA.next;
+  // }
+  // currA = headA;
+  // while (currB) {
+  //   lengthB += 1;
+  //   currB = currB.next;
+  // }
+  // currB = headB;
+  // const gap = lengthA - lengthB;
+  // if (gap > 0) for (let i = 0; i < gap; i++) currA = currA.next;
+  // else for (let i = 0; i < -gap; i++) currB = currB.next;
+  // while (currA) {
+  //   if (currA === currB) return currA;
+  //   currA = currA.next;
+  //   currB = currB.next;
+  // }
+  // return null;
 }
 // @lc code=end
